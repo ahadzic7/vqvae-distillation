@@ -1,0 +1,77 @@
+{
+  "encoder": "Sequential(\n  (0): Conv2d(1, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))\n  (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  (2): ReLU(inplace=True)\n  (3): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))\n  (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  (5): ReLU(inplace=True)\n  (6): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))\n  (7): ResBlock(\n    (block): Sequential(\n      (0): ReLU()\n      (1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n      (2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (3): ReLU()\n      (4): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))\n      (5): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (8): ResBlock(\n    (block): Sequential(\n      (0): ReLU()\n      (1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n      (2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (3): ReLU()\n      (4): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))\n      (5): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n)",
+  "decoder": "Sequential(\n  (0): ResBlock(\n    (block): Sequential(\n      (0): ReLU()\n      (1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n      (2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (3): ReLU()\n      (4): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))\n      (5): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (1): ResBlock(\n    (block): Sequential(\n      (0): ReLU()\n      (1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n      (2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (3): ReLU()\n      (4): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))\n      (5): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (2): ConvTranspose2d(512, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))\n  (3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  (4): ReLU(inplace=True)\n  (5): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))\n  (6): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  (7): ReLU(inplace=True)\n  (8): ConvTranspose2d(128, 2, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))\n  (9): SplitActivation()\n)",
+  "input_shape": {
+    "height": 28,
+    "width": 28,
+    "channels": 1
+  },
+  "output_dim": 2,
+  "latent_shape": {
+    "height": 4,
+    "width": 4,
+    "channels": 512
+  },
+  "codebook_size": 4096,
+  "beta": 10.0,
+  "config": {
+    "seed": 0,
+    "epochs": 1,
+    "max_time": "01:00:00:00",
+    "input_data": {
+      "dataset": "MNIST",
+      "batch_size": 128,
+      "pixel_representation": {
+        "type": "con",
+        "settings": {
+          "con": {
+            "jittering": true,
+            "normalize": false
+          },
+          "cat": {
+            "onehot_encoded": false
+          }
+        }
+      },
+      "supervised": {
+        "use_labeling": false,
+        "n_classes": 10
+      },
+      "input_shape": {
+        "height": 28,
+        "width": 28,
+        "channels": 1
+      }
+    },
+    "n_components": 16384,
+    "distillation_type": "RS",
+    "prior": "pcnn",
+    "vqvae": {
+      "architecture": "overlap",
+      "filters": [
+        128,
+        256
+      ],
+      "latent_shape": {
+        "height": 4,
+        "width": 4,
+        "channels": 512
+      },
+      "codebook_size": 4096,
+      "beta": 10.0,
+      "mu_activation": "sigmoid",
+      "learn_std": {
+        "min_std": 0.001,
+        "max_std": 1.0
+      }
+    },
+    "pcnn": {
+      "n_layers": 10
+    },
+    "clustering": {
+      "use_clustering": false,
+      "n_clusters": 2,
+      "cluster_id": 1
+    }
+  }
+}

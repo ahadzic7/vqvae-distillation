@@ -1,0 +1,59 @@
+{
+    "seed": 0,
+    "epochs": 100,
+    "max_time": "01:00:00:00",
+    "input_data": {
+        "dataset": "MNIST",
+        "batch_size": 128,
+        
+        "pixel_representation": {
+            "type": "con",
+            "settings": {
+                "con": {
+                    "jittering": true,
+                    "normalize": false
+                },
+                "cat": { "onehot_encoded": false }
+            }
+        },
+
+        "supervised": {
+            "use_labeling": true,
+            "n_classes": 10
+        },
+
+        "input_shape": {
+            "height": 28,
+            "width": 28,
+            "channels": 1
+        }
+    },
+    "n_components": 16384,
+    "distillation_type": "BS",
+    "prior": "pcnn",
+    "vqvae": {
+        "architecture": "overlap",
+        "filters": [ 32, 64, 128 ],
+        "latent_shape": {
+            "height": 2,
+            "width": 2,
+            "channels": 256
+        },
+        "codebook_size": 4,
+        "beta": 10.0,
+
+        "mu_activation": "sigmoid",
+        "learn_std": {
+            "min_std": 1e-3,
+            "max_std": 1.0
+        }
+    },
+    "pcnn": {
+        "n_layers": 10
+    },
+    "clustering": {
+        "use_clustering": false,
+        "n_clusters": 2,
+        "cluster_id": 1
+    }
+}
