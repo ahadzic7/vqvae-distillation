@@ -30,7 +30,6 @@
 /lightning_logs
 
 *.png
-*.txt
 *.log
 *.batch
 *.sh
