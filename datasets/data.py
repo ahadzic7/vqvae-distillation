@@ -1,16 +1,14 @@
 import torch
 from torchvision import transforms
-from torchvision.datasets import MNIST, FashionMNIST, SVHN, CelebA
+from torchvision.datasets import MNIST, FashionMNIST
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
-from joblib import dump, load
+from joblib import load
 import random
-import math
 import os
 from tqdm import tqdm
 
 from datasets.UnsupervisedDataset import UnsupervisedDataset
-from datasets.BatchFileLoader import BatchFileLoader
 from torch.utils.data import random_split
 
 

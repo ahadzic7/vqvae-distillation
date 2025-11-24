@@ -54,7 +54,7 @@ def performance(models_dir, config, rdir, seeds, mode="test"):
     def safe_var(xs):
         return statistics.variance(xs) if len(xs) > 1 else 0.0
     print(seeds)
-    for i in range(14, 13, -1):
+    for i in range(14, -1, -1):
         n = 2**i
         bpds, fids = [], []
         totp = None
