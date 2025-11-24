@@ -1,14 +1,14 @@
 import torch
+from tqdm import tqdm
 from torchvision.utils import save_image
-from src.utilities import *
+from src.utilities import seed_everything, get_device, display_histogram, mixture_type
 from src.mm.CategoricalMixture import CategoricalMixture as CMM
 from src.mm.GaussianMixture import GaussianMixture as GMM
 import pandas as pd
-import matplotlib.pyplot as plt
+import os
 from datasets.data import data_loaders
-from src.searches.minll_search import minll_search
 from src.scripts.model_loaders import load_pcnn
-from src.metrics import bpd_dataset, fid_score
+from src.metrics import bpd_dataset
 
 def images(theta, config, rdir):
     pr = config["input_data"]["pixel_representation"]
@@ -102,7 +102,6 @@ def eval_pcnn(
 
     n_components = 2**14
 
-    # theta = minll_search(pcnn, trainl, n_components)
     theta = pcnn.params(n_components) 
  
     for c in range(data["input_shape"]["channels"]):

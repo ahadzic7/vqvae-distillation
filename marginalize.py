@@ -58,10 +58,11 @@ if __name__ == '__main__':
 
     with open(args.config, 'r') as json_file:
         config = json.load(json_file)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
     marginalize(
         config, 
-        models_dir="/home/hadziarm/vqvae-tpm/experimental_settings/models",
-        rdir="/home/hadziarm/vqvae-tpm/evaluations"
+        models_dir=f"{current_dir}/experimental_settings/models",
+        rdir=f"{current_dir}/results",
     )
 
 

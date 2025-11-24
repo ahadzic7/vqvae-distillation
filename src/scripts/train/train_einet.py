@@ -11,6 +11,7 @@ from src.metrics import eval_ll
 from datasets.data import data_loaders, cluster_data
 from src.EinsumNetwork import EinsumNetwork
 from src.EinsumNetwork.graph.poon_domingos_structure import poon_domingos_structure
+from src.scripts.eval.eval_einet import eval_einet
 
 
 def graph(config, dims): 
@@ -224,9 +225,5 @@ def training_einet(config, models_dir):
     return spn
 
 def train_einet(config, models_dir, rdir=None):
-
     spn = training_einet(config, models_dir)
-    from src.scripts.eval.eval_einet import eval_einet
-
-
     eval_einet(config, models_dir, rdir=rdir, einet=spn)

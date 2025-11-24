@@ -5,11 +5,10 @@ import pandas as pd
 import statistics
 from torchvision.utils import save_image
 from src.utilities import get_device, display_histogram, to_rgb, seed_everything
-from src.utilities import dataloader_random_sample, dataloader_from_sampler_lazy
 from src.mm.CategoricalMixture import CategoricalMixture as CMM
 from src.mm.GaussianMixture import GaussianMixture as GMM
 from datasets.data import data_loaders
-from src.scripts.model_loaders import ModelLoader, load_dm, load_theta, load_pcnn, load_classifier
+from src.scripts.model_loaders import ModelLoader, load_dm, load_theta, load_pcnn
 from src.metrics import bpd_dataset, fid_comparison, fid_score, fid_comparison_labeled
 import torch.nn.functional as F
 
@@ -31,7 +30,7 @@ def images(dm, config, rdir):
 
     torch.use_deterministic_algorithms(False)
     samples = dm.sample(n)
-    torch.use_deterministic_algorithms(True)
+    torch.use_deterministic_algorithms(True, warn_only=True)
     save_image(samples, f"{rdir}/samples-{dm.n_components}.png", nrow=6)
 
 
@@ -233,6 +232,7 @@ def inpaints(dm, testl, device, rdir):
 
 
 def inpaints_full(dm, testl, device, rdir):
+    print("Inpainting full...")
     batch=12
     images = []
     start = 0
@@ -255,7 +255,9 @@ def inpaints_full(dm, testl, device, rdir):
             image = image.float()
             image /= 255.
         if image.shape[1] == 1:
+            print(image.shape)
             image = to_rgb(image, mask).cpu()
+            print(image.shape)
         images.append(image.cpu())
         start+=batch
     inpainted = torch.cat(images, dim=0)
@@ -276,7 +278,6 @@ def eval_dm(
 
     if dm is None:
         dm, model_name = ModelLoader(models_dir, config).load_dm(seed=config["seed"])
-        # dm, model_name = load_dm(models_dir, config, seed=0)
     else:
         model_name = ModelLoader(models_dir, config).path_builder.continuous_dm_name()
 
@@ -307,12 +308,3 @@ def eval_dm(
     performance_full(models_dir, config, rdir, seeds=seeds, mode="test")
 
     # performance(models_dir, config, rdir, data, seeds=seeds, mode="train")
-
-    # samplesl = dataloader_from_sampler_lazy(dm, total_samples=10_000)
-
-    # classifier, model_name = load_classifier(models_dir, config)
-    # classifier.eval()
-
-    # hist = classifier.classification_hist_dl(samplesl, True)
-    # print(hist)
-

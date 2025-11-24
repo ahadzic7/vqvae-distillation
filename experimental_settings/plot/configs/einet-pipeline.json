@@ -1,6 +1,6 @@
 {
     "seed": 0,
-    "epochs": 100,
+    "epochs": 1,
     "input_data": {
         "dataset": "MNIST",
         "batch_size": 128,

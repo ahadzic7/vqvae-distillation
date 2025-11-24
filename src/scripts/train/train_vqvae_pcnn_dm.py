@@ -53,21 +53,3 @@ def train_vqvae_pcnn_dm(config, models_dir=None, vqvae=None, rdir=None):
     seed_everything(seed=config["seed"])
     performance(models_dir, config, rdir, [0], mode="test")
 
-
-
-    # model_name = model_loader.path_builder.discrete_dm_name(arch, layers, ld, cb, beta, seed, other_dt, prior)
-    
-    # data = config["input_data"]
-    # pixel = data["pixel_representation"]["type"]
-    # rdir = f'{rdir}/{data["dataset"]}/{pixel}/dm_{model_name}'
-    # os.makedirs(rdir, exist_ok=True)
-
-
-
-
-    # DISTILLATION_TYPES[other_dt](config, models_dir, prior_model)
-    
-    # performance(models_dir, config, rdir, [0], mode="test")
-    
-    
-    

@@ -36,28 +36,35 @@ if __name__ == '__main__':
     args = arguments()
 
     cfs = {
-        "vqvae-pcnn-dm": ("./experimental_settings/plot/configs/dm-pipeline-RS-1.json", train_vqvae_pcnn_dm),
- 
-        "cm": ("./experimental_settings/plot/configs/cm-pipeline.json", train_cm),
+        # "./experimental_settings/plot/configs/dm-pipeline-RS-1.json": train_vqvae_pcnn_dm,
+        # "./experimental_settings/plot/configs/dm-pipeline-RS-2.json": train_vqvae_pcnn_dm,
+        # "./experimental_settings/plot/configs/dm-pipeline-BS.json": train_vqvae_pcnn_dm,
 
-        "einet": ("./experimental_settings/plot/configs/einet-pipeline.json", train_einet),
+        "./experimental_settings/plot/configs/cm-pipeline.json": train_cm,
+        "./experimental_settings/plot/configs/einet-pipeline.json": train_einet,
+        
+        "./experimental_settings/plot/configs/exact_models/dm-pipeline-1.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/configs/exact_models/dm-pipeline-2.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/configs/exact_models/dm-pipeline-3.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/configs/exact_models/dm-pipeline-4.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/configs/exact_models/dm-pipeline-5.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/configs/exact_models/dm-pipeline-6.json": train_vqvae_pcnn_dm,
+        
+        "./experimental_settings/inpaints/configs/dm-pipeline-RS.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/inpaints/configs/dm-pipeline-BS.json": train_vqvae_pcnn_dm,
+
     }
     
-    if args.model_type not in cfs:
-        raise ValueError(f"Unsupported model type: '{args.model_type}'.")
-    config_file, train_fun = cfs[args.model_type]    
-    if args.config is not None:
-        config_file = args.config
-
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    models_dir = f"{current_dir}/experimental_settings/models"
-    rdir = f"{current_dir}/experimental_settings/results"
+    models_dir = f"{current_dir}/models"
+    rdir = f"{current_dir}/results"
 
-    
-    config=None
-    with open(config_file, 'r') as json_file:
-        config = json.load(json_file)
-    
-    seed_everything(seed=config["seed"])
-    train_fun(config, models_dir, rdir)
-    
+
+    for config_file in cfs.keys():
+        train_fun = cfs[config_file]
+        with open(config_file, 'r') as json_file:
+            config = json.load(json_file)
+        
+        seed_everything(seed=config["seed"])
+        train_fun(config, models_dir=models_dir, rdir=rdir)
+ 

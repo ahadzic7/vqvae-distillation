@@ -111,12 +111,13 @@ def trainer_with_universal_logger(
     trainer = pl.Trainer(
         max_epochs=max_epochs,
         max_time=max_time,
-        callbacks=[callback, timer_callback, epoch_timer_callback],
+        callbacks=[callback],
         logger=logger,
         deterministic=True,
         log_every_n_steps=50,  # Reasonable default for epoch-based plotting
         check_val_every_n_epoch=1,
         enable_progress_bar=True,
+        enable_checkpointing=False,
     )
     
     return trainer, timer_callback, epoch_timer_callback
@@ -165,26 +166,6 @@ def pixelcnn_trainer(
         **kwargs
     )
 
-def pixelsnail_trainer(
-    log_folder: str,
-    max_epochs: int,
-    name: str = "pixelsnail_experiment",
-    version:str = "",
-    **kwargs
-) -> pl.Trainer:
-    """Create a trainer specifically configured for PixelSnail models."""
-    loss_groups = { "Cross entropy Loss": ["train_loss", "valid_loss"], }
-    return trainer_with_universal_logger(
-        log_folder=log_folder,
-        loss_groups=loss_groups,
-        max_epochs=max_epochs,
-        model_type="pixelsnail",
-        name=name,
-        version=version,
-        **kwargs
-    )
-
-
 def cm_trainer(
     log_folder: str,
     max_epochs: int,
@@ -204,98 +185,6 @@ def cm_trainer(
         **kwargs
     )
 
-def classifier_trainer(
-    log_folder: str,
-    max_epochs: int,
-    name: str = "classifier_experiment",
-    version:str = "",
-    **kwargs
-) -> pl.Trainer:
-    """Create a trainer specifically configured for Classifier models."""
-    loss_groups = { 
-        "Cross entropy Loss": ["train_loss", "valid_loss"], 
-        "Accuracy": ["train_acc", "valid_acc"],
-    }
-    return trainer_with_universal_logger(
-        log_folder=log_folder,
-        loss_groups=loss_groups,
-        max_epochs=max_epochs,
-        model_type="classifier",
-        name=name,
-        version=version,
-        **kwargs
-    )[0]
-
-
-
-def vae_trainer(
-    log_folder: str,
-    max_epochs: int,
-    name: str = "vae_experiment",
-    version:str = "",
-    **kwargs
-) -> pl.Trainer:
-    """Create a trainer specifically configured for VAE models."""
-    loss_groups = {
-        "Total Loss": ["train_loss", "valid_loss"],
-        "Reconstruction Loss": ["train_rec", "valid_rec"],
-        "KL divergence": ["train_kl_div", "valid_kl_div"],
-    }
-    return trainer_with_universal_logger(
-        log_folder=log_folder,
-        max_epochs=max_epochs,
-        loss_groups=loss_groups,
-        model_type="vae",
-        name=name,
-        version=version,
-        **kwargs
-    )
-
-def ae_trainer(
-    log_folder: str,
-    max_epochs: int,
-    name: str = "ae_experiment",
-    version:str = "",
-    **kwargs
-) -> pl.Trainer:
-    """Create a trainer specifically configured for AE models."""
-    loss_groups = {
-        "Total Loss": ["train_loss", "valid_loss"],
-        "Reconstruction Loss": ["train_rec", "valid_rec"],
-    }
-    return trainer_with_universal_logger(
-        log_folder=log_folder,
-        max_epochs=max_epochs,
-        loss_groups=loss_groups,
-        model_type="ae",
-        name=name,
-        version=version,
-        **kwargs
-    )
-
-def vqvae_rec_trainer(
-    log_folder: str,
-    max_epochs: int,
-    name: str = "vqvae_rec_experiment",
-    version:str = "",
-    **kwargs
-) -> pl.Trainer:
-    """Create a trainer specifically configured for VQ-VAE models."""
-    loss_groups = {
-        "Total Loss": ["train_loss", "valid_loss"],
-        "Reconstruction Loss": ["train_rec", "valid_rec"],
-        "Codebook Loss": ["train_cod", "valid_cod"],
-        "Commitment Loss": ["train_com", "valid_com"],
-    }
-    return trainer_with_universal_logger(
-        log_folder=log_folder,
-        max_epochs=max_epochs,
-        loss_groups=loss_groups,
-        model_type="vqvae",
-        name=name,
-        version=version,
-        **kwargs
-    )
 
 # Usage examples and documentation
 """

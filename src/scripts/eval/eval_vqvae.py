@@ -7,7 +7,6 @@ from datasets.data import data_loaders
 import torch.nn.functional as F
 from src.scripts.model_loaders import load_vqvae
 from src.metrics import fid_score, perplexity_grid, plot_codebook_perplexity, mse_loss, nll_loss
-from torch.utils.data import TensorDataset, DataLoader
 
 def images(vqvae, config, rdir, testl):
     x = next(iter(testl))[:config["n_recons"]].to(vqvae.device)

@@ -5,6 +5,8 @@ from src.cm.nets import mnist_conv_decoder, celeba_conv_decoder_128, svhn_conv_d
 from src.utilities import latent_dim, seed_everything
 from src.scripts.train.setup.setup import trainer_setup, cm_trainer
 from datasets.data import data_loaders
+from src.scripts.eval.eval_cm import performance
+
 import torch.nn as nn
 
 from src.utilities import get_device
@@ -152,7 +154,6 @@ def train_cm(config, models_dir, rdir=None):
     trainer.fit(cm, trainl, validl)
     save_cm(models_dir, config, cm)
 
-    from scripts.eval.eval_cm import performance
     data_cnf = config["input_data"]
 
     pixel = data_cnf["pixel_representation"]["type"]

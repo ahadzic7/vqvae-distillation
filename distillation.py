@@ -1,24 +1,17 @@
 import torch
 import numpy as np
 import json
-from src.utilities import latent_dim, seed_everything, set_determinism
-from src.scripts.model_loaders import load_pcnn, load_psnail, load_vqvae, load_vae, load_ae
-from datasets.data import data_loaders
+from src.utilities import seed_everything
+from src.scripts.model_loaders import load_pcnn, load_vqvae
 from src.searches.beam_search import beam_search_random_start_c
 import argparse
 import os
 
-from src.scripts.model_savers import save_discrete_latents, save_continuous_latents
+from src.scripts.model_savers import save_discrete_latents
 from src.scripts.model_loaders import load_dm
 
 SAVE = {
     "pcnn": save_discrete_latents,
-    "psnail": save_discrete_latents,
-    "vqvae": save_discrete_latents,
-
-    "vae": save_continuous_latents,
-
-    "ae": save_continuous_latents,
 }
 
 def rs_distillation(config, models_dir, prior):

@@ -1,11 +1,12 @@
 from src.pcnn.ConditionedPixelCNN import ConditionedPixelCNN
 from src.pcnn.PixelCNN import PixelCNN
-from src.utilities import *
-from src.scripts.train.setup.setup import trainer_setup, pixelcnn_trainer
+from src.utilities import get_device
+import torch
+from src.scripts.train.setup.setup import pixelcnn_trainer
 from datasets.data import data_loaders, cluster_data
 from src.scripts.model_loaders import ModelLoader
 from src.scripts.model_savers import save_pcnn
-from src.scripts.model_loaders import load_vqvae, load_vqvae_rec
+from src.scripts.model_loaders import load_vqvae
 
 def train_pcnn(config, models_dir=None, vqvae=None):
     if vqvae is None:

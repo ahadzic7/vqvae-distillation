@@ -28,7 +28,7 @@
             "channels": 1
         }
     },
-    "n_components": 16384,
+    "n_components": 1,
     "distillation_type": "RS",
     "prior": "pcnn",
     "vqvae": {

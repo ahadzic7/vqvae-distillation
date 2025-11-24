@@ -29,7 +29,7 @@
         }
     },
     "model": {
-        "n_bins": 16384,
+        "n_bins": 1,
         "latent_shape": {
             "height": 1,
             "width": 1,
@@ -40,7 +40,7 @@
             "batch_norm": true,
             "bias": false,
             "resblock": true,
-            "out_channels": 6
+            "out_channels": 2
         },
         "learn_std": true,
         "min_std": 1e-3,

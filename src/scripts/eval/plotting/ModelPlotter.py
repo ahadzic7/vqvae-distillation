@@ -3,93 +3,38 @@ import numpy as np
 # Central registry for all models - each model has consistent visual identity
 MODEL_REGISTRY = {
 
-    "DM": {
+    "DMRS 4x4": {
         'marker': 'o', 
-        'color': "#030305", 
-        'label': 'DM',
+        'color': "#072655", 
+        'label': 'DMRS 4x4',
         'linestyle': ':'
     },
 
-    "DM best fid": {
+    "DMBS 4x4": {
         'marker': 'o', 
-        'color': "#0202BD", 
-        'label': 'Lowest FID 8x8x256 - beta=1.0 ML',
+        'color': "#098D9E", 
+        'label': 'DMBS 4x4',
         'linestyle': '-'
     },
 
-    "DM best bpd": {
+    "DMRS 2x2": {
         'marker': 'o', 
-        'color': "#FFE600", 
-        'label': 'Lowest BPD 1x1x256 - beta=50.0',
+        'color': "#C78408", 
+        'label': 'DMRS 2x2',
         'linestyle': '-' 
     },
 
-    "DM best lsm": {
-        'marker': 'o', 
-        'color': "#1D9E0C", 
-        'label': 'Lowest Sum of Ranks 1x1x1024 - beta=50.0',
-        'linestyle': ':' 
-    },
 
-    "DM best ns": {
-        'marker': 'o', 
-        'color': "#740FC7", 
-        'label': 'Lowest Norm. Score 8x8x256 - beta=50.0',
-        'linestyle': ':'
-    },
-
-
-
-    "dm-RS (old loss)": {
-        'marker': 'o', 
-        'color': '#000080', 
-        'label': 'DM-RS (old loss) 8x8x128 - 256',
-        'linestyle': ':'
-    },
-    "dm-RS (new loss)": {
-        'marker': 'o', 
-        'color': "#0059FF", 
-        'label': 'DM-RS (new loss) 8x8x128 - 256',
-        'linestyle': '-'
-    },
-    "dm-ML (old loss)": {
-        'marker': 'o', 
-        'color': "#356504", 
-        'label': 'DM-ML (old loss) 8x8x128 - 256',
-        'linestyle': ':'
-    },
-
-    "dm-ML (old loss) big": {
-        'marker': 'o', 
-        'color': "#000000", 
-        'label': 'DM-ML (old loss) 8x8x256 - 512',
-        'linestyle': ':'
-    },
-
-    "dm-ML (new loss)": {
-        'marker': 'o', 
-        'color': "#18D3BA", 
-        'label': 'DM-ML (new loss)',
-        'linestyle': '-'
-    },
-
-    "dm-ML (old loss) w. prior": {
-        'marker': 'o', 
-        'color': "#C0D318", 
-        'label': 'DM-ML (old loss) w. prior 8x8x128 - 256',
-        'linestyle': '-'
-    },
-
-    "cm": {
+    "CM": {
         'marker': '^', 
         'color': "#C00B0B", 
         'label': 'CM 1x1x16',
         'linestyle': '-'
     },
 
-    "einets": {
+    "EiNet": {
         'marker': 's', 
-        'color': "#000000", 
+        'color': "#128512", 
         'label': 'EiNet',
         'linestyle': '--'
     }

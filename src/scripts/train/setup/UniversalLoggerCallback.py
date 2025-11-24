@@ -56,7 +56,6 @@ class UniversalLoggerCallback(pl.Callback):
             if self.save_weights_only:
                 torch.save(pl_module.state_dict(), path)
             else:
-                # trainer.save_checkpoint(path)
                 torch.save(pl_module, path)
 
             pl_module.print()
