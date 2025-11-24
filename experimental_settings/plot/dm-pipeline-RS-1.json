@@ -28,8 +28,8 @@
             "channels": 1
         }
     },
-    "n_components": 1,
-    "distillation_type": "BS",
+    "n_components": 16384,
+    "distillation_type": "RS",
     "prior": "pcnn",
     "vqvae": {
         "architecture": "overlap",

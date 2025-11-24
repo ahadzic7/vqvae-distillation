@@ -36,22 +36,22 @@ if __name__ == '__main__':
     args = arguments()
 
     cfs = {
-        # "./experimental_settings/plot/configs/dm-pipeline-RS-1.json": train_vqvae_pcnn_dm,
-        # "./experimental_settings/plot/configs/dm-pipeline-RS-2.json": train_vqvae_pcnn_dm,
-        # "./experimental_settings/plot/configs/dm-pipeline-BS.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/dm-pipeline-RS-1.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/dm-pipeline-RS-2.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/dm-pipeline-BS.json": train_vqvae_pcnn_dm,
 
-        "./experimental_settings/plot/configs/cm-pipeline.json": train_cm,
-        "./experimental_settings/plot/configs/einet-pipeline.json": train_einet,
+        "./experimental_settings/plot/cm-pipeline.json": train_cm,
+        "./experimental_settings/plot/einet-pipeline.json": train_einet,
         
-        "./experimental_settings/plot/configs/exact_models/dm-pipeline-1.json": train_vqvae_pcnn_dm,
-        "./experimental_settings/plot/configs/exact_models/dm-pipeline-2.json": train_vqvae_pcnn_dm,
-        "./experimental_settings/plot/configs/exact_models/dm-pipeline-3.json": train_vqvae_pcnn_dm,
-        "./experimental_settings/plot/configs/exact_models/dm-pipeline-4.json": train_vqvae_pcnn_dm,
-        "./experimental_settings/plot/configs/exact_models/dm-pipeline-5.json": train_vqvae_pcnn_dm,
-        "./experimental_settings/plot/configs/exact_models/dm-pipeline-6.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/exact_models/dm-pipeline-1.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/exact_models/dm-pipeline-2.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/exact_models/dm-pipeline-3.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/exact_models/dm-pipeline-4.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/exact_models/dm-pipeline-5.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/plot/exact_models/dm-pipeline-6.json": train_vqvae_pcnn_dm,
         
-        "./experimental_settings/inpaints/configs/dm-pipeline-RS.json": train_vqvae_pcnn_dm,
-        "./experimental_settings/inpaints/configs/dm-pipeline-BS.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/inpaints/dm-pipeline-RS.json": train_vqvae_pcnn_dm,
+        "./experimental_settings/inpaints/dm-pipeline-BS.json": train_vqvae_pcnn_dm,
 
     }
     

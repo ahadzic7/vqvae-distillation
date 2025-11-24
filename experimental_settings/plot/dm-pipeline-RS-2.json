@@ -1,11 +1,11 @@
 {
     "seed": 0,
-    "epochs": 1,
-    "max_time": "02:00:00:00",
+    "epochs": 100,
+    "max_time": "01:00:00:00",
     "input_data": {
         "dataset": "MNIST",
         "batch_size": 128,
-
+        
         "pixel_representation": {
             "type": "con",
             "settings": {
@@ -18,7 +18,7 @@
         },
 
         "supervised": {
-            "use_labeling": false,
+            "use_labeling": true,
             "n_classes": 10
         },
 
@@ -28,31 +28,32 @@
             "channels": 1
         }
     },
-    "model": {
-        "n_bins": 1,
+    "n_components": 16384,
+    "distillation_type": "RS",
+    "prior": "pcnn",
+    "vqvae": {
+        "architecture": "overlap",
+        "filters": [ 32, 64, 128 ],
         "latent_shape": {
-            "height": 1,
-            "width": 1,
-            "channels": 16
+            "height": 2,
+            "width": 2,
+            "channels": 256
         },
-        "decoder_net": {
-            "n_filters": 32,
-            "batch_norm": true,
-            "bias": false,
-            "resblock": true,
-            "out_channels": 2
-        },
-        "learn_std": true,
-        "min_std": 1e-3,
-        "max_std": 1.0,
-        "K": 1,
-        "n_chunks": 32,
-        "missing": null,
-        "layers": 4
+        "codebook_size": 4096,
+        "beta": 10.0,
+
+        "mu_activation": "sigmoid",
+        "learn_std": {
+            "min_std": 1e-3,
+            "max_std": 1.0
+        }
+    },
+    "pcnn": {
+        "n_layers": 10
     },
     "clustering": {
         "use_clustering": false,
-        "n_clusters": 100,
-        "cluster_id": 0
+        "n_clusters": 2,
+        "cluster_id": 1
     }
 }
